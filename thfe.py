@@ -1,3 +1,5 @@
+import pywt
+
 class THFE:
 
     def __init__(self, values):
@@ -52,6 +54,20 @@ class THFE:
 
     def __str__(self):
         return str(self.__values)
+
+
+def convertSignalToTHFE(inputSignal):
+    valuesResolutions = list()
+    wavelet = pywt.Wavelet('haar')
+    n = pywt.dwt_max_level(len(inputSignal), wavelet)
+    signal = inputSignal
+    for i in range(n):
+        cA, cB = pywt.dwt(signal, wavelet)
+        for x in cA:
+            valuesResolutions.append(x)
+        signal = cA
+    return THFE(valuesResolutions)
+
 
 
 ONE = THFE([1.0])
