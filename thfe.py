@@ -47,10 +47,10 @@ class THFE:
     def __lshift__(self, other):
         '''Metodo que implementa a distancia média'''
         S = 0.0
-        for x in self.__degrees:
-            for z in other.getDegrees():
+        for x in self.__values:
+            for z in other.getValues():
                 S = S + abs(x - z)
-        return Z/(len(self.__degrees) * len(other.getDegrees()))
+        return S/(len(self.__values) * len(other.getValues()))
 
     def __str__(self):
         return str(self.__values)
